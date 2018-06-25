@@ -7,6 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!--아래 로그인 로직은 이미 만들어져있는 약속되어 있는것임.(내부적으로 구현되어 있음.)-->
+<% if user_signed_in? %>
+  <%= current_user.email %>
+  <a href="/users/sign_out" data-method="delete">로그아웃</a>
+<% else %>
+  <a href="/users/sign_in">로그인</a>
+  <a href="/users/sign_up">회원가입</a>
+<% end %>
 
 <%= yield %>
 
