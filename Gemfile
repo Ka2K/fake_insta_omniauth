@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'simple_form'
+
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+gem 'pry-rails'
 # 회원가입을 위한 gem
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

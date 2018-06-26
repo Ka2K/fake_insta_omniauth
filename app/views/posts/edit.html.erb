@@ -1,8 +1,32 @@
 <h1>수정해</h1>
-<form action="/posts/<%=@post.id%>/update" method="post">
+<%= render 'form' %>
+<form action="/posts/<%=@post.id%>" method="post">
   <input type="text" name="title" value="<%=@post.title%>"/> <br />
   <textarea name="content"><%=@post.content%></textarea> <br />
   <input type="hidden" name="_method" value="put" />
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
   <input type="submit" />
 </form>
+
+<%= form_tag("/posts/#{@post.id}", method: 'put') do %>
+<!-- method: 'put'로 하면
+<input type="hidden" name="_method" value="put" /> => 이부분은 자동으로 생성해준다. -->
+  <%= text_field_tag :title, @post.title %>
+  <%= text_area_tag :content, @post.content %>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<%# form_for @post do |f| %>
+<!-- post controller에서
+def set_post
+  @post = Post.find(params[:id])
+end 에서 @post를 정해줬으므로 그냥 사용해도 됨. -->
+  <%# f.text_field :title %>
+  <%# f.text_area :content %>
+<!-- 여기서 수정화면에서 저절로 @post.title, @post.content가 쓰여있는데, 이 이유는 post controller에서 @post가 find역할을 해주기 때문에 form_for가 자동으로 뿌려주기 때문이다.-->
+<!-- @post가 받을수 있는 column(:title, :content등)이어야 됨. -->
+  <%# f.submit %>
+<%# end %>
+
+<!-- 위아래 차이>>1. 위에 title은 그냥, 아래 title은 @post의 column
+                  2. 아래는 2중 hash로 받아오므로 post controller에서 조작을 해줌. -->

@@ -1,0 +1,13 @@
+<!-- <%= form_for @post do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %> -->
+
+<!-- 위에는 실제 form_for, 아래는 bootstrap 적용하기 위한 simple_form_for -->
+
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.button :submit, class: "btn-info" %>
+<% end %>
