@@ -226,11 +226,7 @@ $ rake db:migrate
 
 * 4개의 코드로 빠르게 게시판을 만들 수 있음.
 
-### Model Validation
-  ```
-  
-  ```
-
+#### Model Validation
 ```ruby
 def create
     @post = Post.new(post_params)
@@ -253,7 +249,7 @@ end
 ..
 ```
 
-### custom helper
+#### custom helper
 
 ```ruby
 # app/helpers/application_helper.rb
