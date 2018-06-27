@@ -105,7 +105,7 @@
       ```
 
 
-
+#### [Active Record Query Interface](https://guides.rorlab.org/active_record_querying.html#%EC%A1%B0%EA%B1%B4)
 
 ```ruby
 Post.find(1)
@@ -120,3 +120,101 @@ Post.where.not("조건")
 User.where("age > ? AND gender = ?", 25,"male") # 나이 25 초과, 남자 
 ```
 
+
+
+#### [Form_tag, Form_for](https://guides.rorlab.org/form_helpers.html)
+
+```erb
+<form action="/posts" method="post">
+  <input type="text" name="title" /> <br />
+  <textarea name="content"></textarea> <br />
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <input type="submit"
+</form>
+```
+
+```erb
+<%= form_tag('/posts', method: 'post') do %>
+  <%= text_field_tag :title %>
+  <%= text_area_tag :content %>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+```
+
+```erb
+<!-- new.html.erb와 edit.html.erb에서 똑같이 사용할 수 있음 => layout으로 뽑아서 사용 가능 -->
+<%= form_for @post do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
+```
+
+* `form_for` 주요 특징
+  * 특정한 모델의 객체(POST)를 조작하기 위해 사용
+  * 별도의 url(action="/"), method(get, post, put) 명시하지 않아도 됨.
+  * Controller의 해당 액션(`new`,`edit`)에서 반드시 @post에 Post 오브젝트가 담겨야 함.
+    * `new`:`@post = Post.new`
+    * `edit`:`@post = Post.find(id)`
+  * 각 input field의 symbol은 반드시 @post의 column 명이랑 일치해야 함.
+
+#### [link_to : url helper](https://apidock.com/rails/ActionView/Helpers/UrlHelper/link_to)
+
+```erb
+<%= link_to '글보기', @post %>
+<%= link_to '글보기', post_path %>
+<%= link_to '새 글 쓰기', new_post_path %>
+<%= link_to '글 수정', edit_post_path %>
+<%= link_to '모든 글 보기', posts_path %>
+<%= link_to '글 삭제', post_path, method: :delete, data: {confirm: "지울래?"} %>
+```
+
+
+
+#### [gem : simple form](https://github.com/plataformatec/simple_form)
+
+1. Gemfile 설정
+
+   ```ruby
+   gem 'simple_form
+   ```
+
+2. bundle install
+
+    ```erb
+   $ bundle install
+    ```
+
+3. 설치
+
+   ```erb
+   $ rails generate simple_form:install --bootstrap
+   ```
+
+4. Bootstrap 프로텍트에 적용
+
+   CDN을 `application.erb`에 넣어주기
+
+5. Form helper 만들기
+
+   ```ruby
+   <%= simple_form_for @post do |f| %>
+     <%= f.input :title %>
+     <%= f.input :content %>
+     <%= f.button :submit, class: "btn-info" %>
+   <% end %>
+   ```
+
+#### Scaffold
+
+```erb
+$ rails new project_name
+$ cd project_name
+$ rails g scaffold post title:string content:text
+$ rake db:migrate
+```
+
+* 4개의 코드로 빠르게 게시판을 만들 수 있음.
+
+   
