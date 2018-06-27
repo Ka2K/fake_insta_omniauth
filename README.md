@@ -1,9 +1,9 @@
-#### Post(1)
+### Post(1)
 
 * posts 컨트롤러 `rails g controller posts index new create show edit update destroy` 
 * post 모델`rails g model post title:string content:text `
 
-#### Comment(N)
+### Comment(N)
 
 * comments 컨트롤러 
 
@@ -14,7 +14,7 @@
   * `rails g model comment content:string post_id:integer`
 
 
-#### [Devise](https://github.com/plataformatec/devise)
+### [Devise](https://github.com/plataformatec/devise)
 
 1. `devise`gem 설치
 
@@ -114,7 +114,7 @@
       ```
 
 
-#### [Active Record Query Interface](https://guides.rorlab.org/active_record_querying.html#%EC%A1%B0%EA%B1%B4)
+### [Active Record Query Interface](https://guides.rorlab.org/active_record_querying.html#%EC%A1%B0%EA%B1%B4)
 
 ```ruby
 Post.find(1)
@@ -131,7 +131,7 @@ User.where("age > ? AND gender = ?", 25,"male") # 나이 25 초과, 남자
 
 
 
-#### [Form_tag, Form_for](https://guides.rorlab.org/form_helpers.html)
+### [Form_tag, Form_for](https://guides.rorlab.org/form_helpers.html)
 
 ```erb
 <form action="/posts" method="post">
@@ -168,7 +168,7 @@ User.where("age > ? AND gender = ?", 25,"male") # 나이 25 초과, 남자
     * `edit`:`@post = Post.find(id)`
   * 각 input field의 symbol은 반드시 @post의 column 명이랑 일치해야 함.
 
-#### [link_to : url helper](https://apidock.com/rails/ActionView/Helpers/UrlHelper/link_to)
+### [link_to : url helper](https://apidock.com/rails/ActionView/Helpers/UrlHelper/link_to)
 
 ```erb
 <%= link_to '글보기', @post %>
@@ -181,7 +181,7 @@ User.where("age > ? AND gender = ?", 25,"male") # 나이 25 초과, 남자
 
 
 
-#### [gem : simple form](https://github.com/plataformatec/simple_form)
+### [gem : simple form](https://github.com/plataformatec/simple_form)
 
 1. Gemfile 설정
 
@@ -215,7 +215,7 @@ User.where("age > ? AND gender = ?", 25,"male") # 나이 25 초과, 남자
    <% end %>
    ```
 
-#### Scaffold
+### Scaffold
 
 ```erb
 $ rails new project_name
@@ -226,7 +226,7 @@ $ rake db:migrate
 
 * 4개의 코드로 빠르게 게시판을 만들 수 있음.
 
-#### Model Validation
+### Model Validation
 ```ruby
 def create
     @post = Post.new(post_params)
@@ -249,7 +249,7 @@ end
 ..
 ```
 
-#### custom helper
+### custom helper
 
 ```ruby
 # app/helpers/application_helper.rb
@@ -270,7 +270,7 @@ end
 <% end %>
 ```
 
-#### [kaminari](https://github.com/kaminari/kaminari)-pagination
+### [kaminari](https://github.com/kaminari/kaminari)-pagination
 
 1. `Gemfile`
 
@@ -303,7 +303,7 @@ end
    $ rails g kaminari:views bootstrap4
    ```
 
-#### [cancancan](https://github.com/CanCanCommunity/cancancan)-권한설정
+### [cancancan](https://github.com/CanCanCommunity/cancancan)-권한설정
 
 1. `Gemfile`
 
