@@ -86,7 +86,16 @@
    $ rails generate devise:views users
    ```
 
-1. [custom column 추가하기](https://github.com/plataformatec/devise#strong-parameters)
+8. config 수정
+
+   ```ruby
+   # config/initializers/devise.rb의 232번째 줄
+   	config.scoped_view = true
+   ```
+
+   * 모든 initializers 폴더 안에 있는 설정은 서버를 껐다가 켜야 반영됨.
+
+9. [custom column 추가하기](https://github.com/plataformatec/devise#strong-parameters)
 
    1. migration 파일에 원하는 column 추가
 
