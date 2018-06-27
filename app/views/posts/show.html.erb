@@ -1,22 +1,27 @@
 <h1>글 봐!!</h1>
-<%= @post.id %>번째 글
-<%= @post.title %>
-<%= @post.content %>
+<p><%= @post.id %>번째 글</p>
+<p>제목 : <%= @post.title %></p>
+<p>내용 : <%= @post.content %></p>
 
+<% if can? :edit, @post %>
 <%= link_to '수정하기', edit_post_path(@post) %>
 <!-- <a href="/posts/<%= @post.id %>/edit">수정하기</a> -->
-<%= link_to '삭제하기', @post, method: :delete, data: (confirm: '너 지울꺼야?') %>
+<% end %>
+
+<% if can? :destroy, @post %>
+<%= link_to '삭제하기', @post, method: :delete, data: {confirm: '너 지울꺼야?'} %>
 <!-- <a href="/posts/<%= @post.id %>" data-method="delete" data-confirm="삭제할래?">삭제하기</a> -->
 <hr />
+<% end %>
 
 <form action="/posts/<%= @post.id%>/comments" method="post">
   <input type="text" name="content" /><br />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="submit" />
+  <input type="submit" value="댓글 쓰기" />
 </form>
 <hr />
 
 <% @comments.each do |comment| %>
-  <%= comment.content %>
+  <%= comment.id %>번째 댓글 : <%= comment.content %>
   <hr />
 <% end %>

@@ -2,11 +2,15 @@
 <!-- <a href="/posts/new">글 쓰러가기</a> -->
 
 <% @posts.each do |post| %>
-  <p><%= post.id %></p>
-  <p><%= post.title %></p>
-  <p><%= post.content %></p>
+  <p><%= post.id %>번 글</p>
+  <p>작성자 : <%= post.user.name %></p>
+  <p>제목 : <%= post.title %></p>
+  <p>내용 : <%= post.content %></p>
   <%= link_to '글보기', post, class: "btn btn-info" %>
   <!--반복문 post가 계속돔. @posts에는 Post.all이 있음. Post.find(1)부터 계속 돔. link_to를 하면 너가 얘를 보러갈거구나 라고 인식함. -->
   <!-- a tag를 이용한 글보러가기 <a href="/posts/<%=post.id%>">글 보러가기</a> -->
   <hr />
 <% end %>
+<div class="d-flex justify-content-center">
+  <%= paginate @posts %>
+</div>
