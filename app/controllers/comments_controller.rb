@@ -1,11 +1,26 @@
 class CommentsController < ApplicationController
-  
+
   def create
     @comment = Post.find(params[:post_id]).comments.new(comment_params)
-    @comment.save
-    redirect_to :back
+    @comment.user_id = current_user.id
+    if @comment.save
+      respond_to do |format|
+        format.html {redirect_to :back}
+        format.js {}
+      end
+    else
+      redirect_to :back
+    end
   end
 
+  def destroy
+    @comment = Comment.find(params[:comment_id])
+    @comment.destroy
+    respond_to do |format|
+    format.html {redirect_to :back} # html type이면 back
+    format.js {} # js type이면 {} => destroy.js.erb
+    redirect_to :back
+  end
   private
   def comment_params
     params.permit(:content)

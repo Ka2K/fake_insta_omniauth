@@ -21,7 +21,78 @@
 </form>
 <hr />
 
+<div id="comments">
 <% @comments.each do |comment| %>
-  <%= comment.id %>번째 댓글 : <%= comment.content %>
+  <p>
+    <%= comment.content %>
+    <!-- <%= link_to '삭제하기', @comment, method: :delete, data: {confirm: '댓글을 지우시겠습니까?'}%> -->
+    <%= link_to '삭제하기', destroy_comment_path(comment.id), class = "delete_comment", data: {confirm: '댓글을 지우시겠습니까?'}%>
+  </p>
   <hr />
 <% end %>
+</div>
+
+<script>
+  $('input[type="submit"]').on('click', function(e) {
+    e.preventDefault();
+    alert('start!')
+    $.ajax({
+      url: $('form').attr('action'),
+      type: "POST" ,
+      data: {content: $('input[name="content"]').val(),
+            authenticity_token: $('[name="csrf-token"]').attr('content')},
+      dataType: "script",
+      success: function(){
+        alert('success!')
+        $('input[name="content"]').val('');
+      },
+      error: function(){
+        alert('fail!');
+      }
+    });
+  });
+
+  $('.delete_comment').on('click', function(e){
+    e.preventDefault();
+    alert("start_delete")
+    $.ajax({
+      url: this.href //<a></a>,
+      type: "DELETE",
+      data: {authenticity_token: $('[name="csrf-token"]').attr('content')},
+      dataType: "script",
+      success: function(){
+        alert("delete_complete!")
+      },
+      error: function(){
+        alert("delete_error!")
+      }
+    })
+  })
+</script>
+
+<!-- <script>
+  $('input[type="submit"]').on('click', function(e) {var response = confirm("정말 제출 하실건가요?");
+  if (!response) {
+    // 이코드가 실행되려면
+    // response = default_messagee.preventDefault();
+    // submint 되는것을 막아준다.
+    // e.preventDefault();
+    return false;
+  } else {
+  //   e.stopImmediatePropagation(); => 동일한 element에 있는 다른 이벤트들 발생 x
+  }
+});
+</script>
+
+<script>
+function checkContentLen(e) {
+  var content = $('input[name="content"]').val();
+  if (content.length < 10) {
+    alert('10글자 이상 작성해 주세요');
+    return false;
+  } else {
+    alert('참 잘했어요!')};
+  }
+}
+$('input[type = "submit"]').on('click', checkContentLen);
+</script> -->
