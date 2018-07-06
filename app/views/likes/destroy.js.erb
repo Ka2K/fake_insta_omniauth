@@ -1,0 +1,4 @@
+var like_btn = $('a[data-id="@post.id"]')
+like_btn.attr('data-method', 'put')
+like_btn.children().toggleClass('far')
+like_btn.children().toggleClass('fas')
