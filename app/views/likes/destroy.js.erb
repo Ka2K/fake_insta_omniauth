@@ -4,8 +4,8 @@ var like_btn = $('a[data-id="<%= @post_id %>"]')
 // like_btn.children().toggleClass('fas')
 
 like_btn.next().text(<%= Post.find(@post)id .liked_users.count %>);
-like_bth.replaceWith(`
-  <%= link_to "posts/#{post.id}/like", data: {id: post.id}, remote: true, method: :put do %>
+like_btn.replaceWith(`
+  <%= link_to "posts/#{@post.id}/like", data: {id: post.id}, remote: true, method: :put do %>
     <i class="far fa-heart"></i>
   <% end %>
   `);
