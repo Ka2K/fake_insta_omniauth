@@ -1,0 +1,5 @@
+//
+var parent = $('a[href="/comments/<%= params[:comment_id] %>"]').parent(); //<p></p>
+var hr = parent.next();
+parent.remove();
+hr.remove();

@@ -1,0 +1,11 @@
+// comments controller에서 format.js의 render를 받아주기 위해 만든 페이지.
+// 뒤에 render를 따로 정해주지 않으면 저절로 그 class(def)명과 같은 형식으로 만들어짐
+// format.js 이므로 create.js.erb로 만들어 준 것임.
+$('div#comments').append(`<p> <%= escape_javascript(@comment.content) %> <%= escape_javascript(link_to '삭제하기', destroy_comment_path(@comment.id), remote: true, class: 'delete_comment', method: :delete, data: {confirm: '댓글을 지우시겠습니까?'}) %> </p><hr />`)
+// escape_javascript == j
+// 'escape_javascript' prevents from double_quoter problem in console
+
+// var a = "<p><%= j(@comment.content) %>"
+// var b = "<%= j(link_to '댓글 삭제하기', destroy_comment_path(@comment.id), method: :delete, remote: true, class: 'delete_comment') %>"
+// var c = "</p><hr />"
+// $("div#comments").append(a+b+c);

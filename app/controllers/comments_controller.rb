@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     if @comment.save
       respond_to do |format|
         format.html {redirect_to :back}
-        format.js {}
+        format.js {render 'create_temp'}
       end
     else
       redirect_to :back
@@ -17,10 +17,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:comment_id])
     @comment.destroy
     respond_to do |format|
-    format.html {redirect_to :back} # html type이면 back
-    format.js {} # js type이면 {} => destroy.js.erb
-    redirect_to :back
+      format.html {redirect_to :back} # html type이면 back
+      format.js {} # js type이면 {} => destroy.js.erb
+    end
   end
+
   private
   def comment_params
     params.permit(:content)

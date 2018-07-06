@@ -14,7 +14,7 @@
 <hr />
 <% end %>
 
-<form action="/posts/<%= @post.id%>/comments" method="post">
+<form action="/posts/<%= @post.id%>/comments" method="post" data-remote = true>
   <input type="text" name="content" /><br />
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="submit" value="댓글 쓰기" />
@@ -26,13 +26,21 @@
   <p>
     <%= comment.content %>
     <!-- <%= link_to '삭제하기', @comment, method: :delete, data: {confirm: '댓글을 지우시겠습니까?'}%> -->
-    <%= link_to '삭제하기', destroy_comment_path(comment.id), class = "delete_comment", data: {confirm: '댓글을 지우시겠습니까?'}%>
+    <%= link_to '삭제하기', destroy_comment_path(comment.id), remote: true, method: :delete, class:"delete_comment"%>
   </p>
   <hr />
 <% end %>
 </div>
 
 <script>
+  $('form').on('ajax:success', function(){
+    $('input[name="content"]').val('');
+  });
+</script>
+
+<!-- form에 'data-remote = "true"'를 해주면 ajax로 작동한다.
+루비문법(<%= %>)안에 있는 친구에는 'remote: true'를 해주면 ajax로 작동한다. 단 이때 method 명시를 해줘야 함. -->
+<!-- <script>
   $('input[type="submit"]').on('click', function(e) {
     e.preventDefault();
     alert('start!')
@@ -68,8 +76,9 @@
       }
     })
   })
-</script>
+</script> -->
 
+<!-- ======================================================================================== -->
 <!-- <script>
   $('input[type="submit"]').on('click', function(e) {var response = confirm("정말 제출 하실건가요?");
   if (!response) {

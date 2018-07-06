@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.page(params[:page]).per(5)
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render :json, @post }
     end
   end
@@ -33,8 +33,8 @@ class PostsController < ApplicationController
         # flash[:alert] = "글 작성에 실패했습니다."
         # redirect_to new_post_path
         format.html { render :new}
-        format.json { render :json, @post.errors }
-     end
+        format.json { render json: @post.errors }
+      end
     end
   end
 
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
         format.html { rediret_to @post, notice: '글 수정 완료'}
       else
         format.html { render :edit}
-        format.json { render :json, @post.errors}
+        format.json { render json: @post.errors}
       end
     end
   end
