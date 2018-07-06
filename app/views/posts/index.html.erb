@@ -18,6 +18,7 @@
   <% end %>
   <!--반복문 post가 계속돔. @posts에는 Post.all이 있음. Post.find(1)부터 계속 돔. link_to를 하면 너가 얘를 보러갈거구나 라고 인식함. -->
   <!-- a tag를 이용한 글보러가기 <a href="/posts/<%=post.id%>">글 보러가기</a> -->
+  <span><%= post.liked_users.count %></span>
   <hr />
 <% end %>
 <div class="d-flex justify-content-center">

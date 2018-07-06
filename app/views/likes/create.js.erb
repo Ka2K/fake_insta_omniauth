@@ -1,4 +1,11 @@
-var like_btn = $('a[data-id="@post.id"]')
-like_btn.attr('data-method', 'delete')
-like_btn.children().toggleClass('far')
-like_btn.children().toggleClass('fas')
+var like_btn = $('a[data-id="<%= @post_id %>"]')
+// like_btn.attr('data-method', 'delete')
+// like_btn.children().toggleClass('far')
+// like_btn.children().toggleClass('fas')
+
+like_btn.next().text(<%= Post.find(@post)id .liked_users.count %>);
+like_bth.replaceWith(`
+  <%= link_to "posts/@post_id/like", data: {id: @post_id}, remote: true, method: :delete do %>
+    <i class="fas fa-heart"></i>
+  <% end %>
+  `)
