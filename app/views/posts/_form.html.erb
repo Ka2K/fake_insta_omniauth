@@ -7,9 +7,12 @@
 
 <!-- 위에는 실제 form_for, 아래는 bootstrap 적용하기 위한 simple_form_for -->
 
-<%= simple_form_for @post do |f| %>
+<%= simple_form_for @post, html: {multipart: true} do |f| %> <!--multipart: true를 해주는 순간 file로 인식하고 file로 넘어감-->
   <%= f.error_notification %>
   <%= f.input :title %>
-  <%= f.input :content %>
+  <%= f.input :content, class: "tinymce", rows: 40, cols: 120 %>
+  <%= tinymce %>
+  <%= f.input :img %>
+  <!-- <input name="post[img]" type="file"> -->
   <%= f.button :submit, class: "btn-info" %>
 <% end %>

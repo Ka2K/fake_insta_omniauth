@@ -3,7 +3,7 @@
 
 <% @posts.each do |post| %>
   <p><%= post.id %>번 글</p>
-  <p>작성자 : <%= post.user.name %></p>
+  <p>작성자 : <%= post.user.email %></p>
   <p>제목 : <%= post.title %></p>
   <p>내용 : <%= post.content %></p>
   <%= link_to '글보기', post, class: "btn btn-info" %>

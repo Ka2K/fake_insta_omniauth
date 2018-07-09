@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :img)
     # form for에서 받을때
     # params = {post: {title: "제목", content: "내용"}} 이렇게 2중으로 받아옴.
     # params[:post][:title] ~> 제목
