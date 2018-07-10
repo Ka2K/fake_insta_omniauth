@@ -1,0 +1,5 @@
+<h2>이메일을 입력해 주세요</h2>
+<%= simple_form_for current_user, url: users_info_path do |f| %>
+<%= f.input :email, autofocus: true %>
+<%= f.submit '제출', class: 'btn btn-info' %>
+<% end %>

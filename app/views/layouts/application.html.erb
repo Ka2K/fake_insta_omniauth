@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container mt-5">
-  <%= gravatar(current_user) %>
+  <%# gravatar(current_user) %>
   <% flash.each do |key, value| %>
    <div class="<%= flash_message(key) %>" role="alert">
      <%= value %>
@@ -21,6 +21,7 @@
 <!--아래 로그인 로직은 이미 만들어져있는 약속되어 있는것임.(내부적으로 구현되어 있음.)-->
   <div class="mt-5">
     <% if user_signed_in? %>
+      <%= image_tag current_user.profile_img, class: "rounded-circle" %>
       <%= current_user.email %>
       <%= link_to '로그아웃', destroy_user_session_path, method: :delete %>
       <!-- <a href="/users/sign_out" data-method="delete">로그아웃</a> -->
